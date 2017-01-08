@@ -1,12 +1,12 @@
 {
 	"name": "csscompile",
-	"version": "0.0.2",
+	"version": "0.0.3",
 	"description": "Compile, optimize and compress anything to CSS.",
 	"homepage": "https://github.com/cjpatoilo/csscompile",
 	"repository": "cjpatoilo/csscompile",
 	"license": "MIT",
 	"author": "CJ Patoilo <cjpatoilo@gmail.com>",
-	"bin":  "src/cli.js",
+	"bin":  "bin/cli.js",
 	"main": "src/index.js",
 	"files": [
 		"bin/cli.js",
