@@ -11,8 +11,13 @@ function exit (value) {
 
 function resolveInput (value) {
 	if (!fs.existsSync(value)) exit('File not found!')
-	if (!fs.lstatSync(value).isFile()) exit('File not found!')
-	return path.parse(value)
+	if (fs.lstatSync(value).isFile()) return path.parse(value)
+	if (fs.lstatSync(value).isDirectory()) {
+		let main = fs.readdirSync(value).filter(file => path.parse(file).name === 'main')
+		main = path.resolve(value , main[0])
+		return path.parse(main)
+	}
+	exit('File not found!')
 }
 
 function resolveOutput (value) {
@@ -29,6 +34,8 @@ function csscompile (input, output, options) {
 	input = resolveInput(input)
 	output = resolveOutput(output)
 	options = options || {}
+
+	console.log(input.rxt)
 
 	return new Promise((resolve, reject) => {
 		try {
