@@ -14,7 +14,7 @@ function resolveInput (value) {
 	if (fs.lstatSync(value).isFile()) return path.parse(value)
 	if (fs.lstatSync(value).isDirectory()) {
 		let main = fs.readdirSync(value).filter(file => path.parse(file).name === 'main')
-		main = path.resolve(value , main[0])
+		main = path.resolve(value, main[0])
 		return path.parse(main)
 	}
 	exit('File not found!')

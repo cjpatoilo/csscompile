@@ -1,6 +1,6 @@
 {
 	"name": "csscompile",
-	"version": "0.0.1",
+	"version": "0.0.2",
 	"description": "Compile, optimize and compress anything to CSS.",
 	"homepage": "https://github.com/cjpatoilo/csscompile",
 	"repository": "cjpatoilo/csscompile",
@@ -57,7 +57,7 @@
 		"node": ">=4"
 	},
 	"scripts": {
-		"precommit": "npm t",
+		"precommit": "npm test",
 		"test": "nyc ava && eslint . -c styled --ignore-path .gitignore && editorconfig-tools check ."
 	}
 }
