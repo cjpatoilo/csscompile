@@ -1,0 +1,63 @@
+{
+	"name": "csscompile",
+	"version": "0.0.0",
+	"description": "Compile, optimize and compress anything to CSS.",
+	"homepage": "https://github.com/cjpatoilo/csscompile",
+	"repository": "cjpatoilo/csscompile",
+	"license": "MIT",
+	"author": "CJ Patoilo <cjpatoilo@gmail.com>",
+	"bin":  "cli.js",
+	"main": "src/index.js",
+	"files": [
+		"bin/cli.js",
+		"src/index.js"
+	],
+	"keywords": [
+		"automation",
+		"autoprefixer",
+		"cli",
+		"compile",
+		"compress",
+		"css",
+		"cssnano",
+		"framework",
+		"less",
+		"minified",
+		"npm",
+		"optimize",
+		"package",
+		"postcss",
+		"render",
+		"sass",
+		"scss",
+		"stylus"
+	],
+	"ignore": [
+		".appveyor.yml",
+		".editorconfig",
+		".github",
+		".gitignore",
+		".travis.yml"
+	],
+	"dependencies": {
+		"less": "^2.7.2",
+		"mkdirp": "^0.5.1",
+		"node-sass": "^4.1.1",
+		"stylus": "^0.54.5"
+	},
+	"devDependencies": {
+		"ava": "^0.17.0",
+		"editorconfig-tools": "^0.1.1",
+		"eslint": "^3.12.1",
+		"eslint-config-styled": "^0.0.0",
+		"husky": "^0.12.0",
+		"nyc": "^10.0.0"
+	},
+	"engines": {
+		"node": ">=4"
+	},
+	"scripts": {
+		"precommit": "npm t",
+		"test": "nyc ava && eslint . -c styled --ignore-path .gitignore && editorconfig-tools check ."
+	}
+}
