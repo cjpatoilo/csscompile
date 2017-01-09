@@ -2,6 +2,7 @@
 
 > Compile, optimize and compress anything to CSS.
 
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/acd168808f5445de9c7a859ccfa141c7)](https://www.codacy.com/app/cjpatoilo/csscompile?utm_source=github.com&utm_medium=referral&utm_content=cjpatoilo/csscompile&utm_campaign=badger)
 [![Travis Status](https://travis-ci.org/cjpatoilo/csscompile.svg?branch=master)](https://travis-ci.org/cjpatoilo/csscompile?branch=master)
 [![AppVeyor Status](https://ci.appveyor.com/api/projects/status/ddvb3deetsy4hbus?svg=true)](https://ci.appveyor.com/project/cjpatoilo/csscompile)
 [![Codacy Status](https://img.shields.io/codacy/grade/acd168808f5445de9c7a859ccfa141c7/master.svg)](https://www.codacy.com/app/cjpatoilo/csscompile/dashboard)
