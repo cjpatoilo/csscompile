@@ -13,7 +13,7 @@ if (argv.indexOf('--help') !== -1 || argv.indexOf('-h') !== -1) {
 	console.log(`
   Usage:
 
-    $ csscompile <input> <output> [<options>]
+    $ csscompile <input> [<output>] [<options>]
 
   Options:
 
@@ -22,7 +22,7 @@ if (argv.indexOf('--help') !== -1 || argv.indexOf('-h') !== -1) {
 
   Examples:
 
-    $ csscompile src/main.styl dist/main.css
+    $ csscompile src/app.sass dist/app.css
 `)
 	process.exit(0)
 }

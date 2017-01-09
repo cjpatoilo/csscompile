@@ -4,38 +4,37 @@ const path = require('path')
 const child = require('child_process')
 const mkdirp = require('mkdirp')
 
-function exit (value) {
+function error (value) {
+	value = value || undefined
 	console.error(`[error] ${value}`)
 	process.exit(1)
 }
 
 function resolveInput (value) {
-	if (!fs.existsSync(value)) exit('File not found!')
+	if (!fs.existsSync(value)) error('File not found!')
 	if (fs.lstatSync(value).isFile()) return path.parse(value)
 	if (fs.lstatSync(value).isDirectory()) {
-		let main = fs.readdirSync(value).filter(file => path.parse(file).name === 'main')
-		main = path.resolve(value, main[0])
+		let main = fs.readdirSync(value)
+			.filter(file => path.parse(file).name === 'main' && path.parse(file).ext !== '.css')
+		main = main[0] ? path.resolve(value, main[0]) : error('Main file not found!')
 		return path.parse(main)
 	}
-	exit('File not found!')
+	error('File not found!')
 }
 
 function resolveOutput (value) {
+	if (path.basename(value) !== '.css') value = path.resolve(value, 'main.css')
 	value = path.parse(value)
-	if (value.ext !== '.css') exit('Output should have .css extension!')
+	if (value.ext !== '.css') value.ext = '.css'
+	if (path.extname(value.base) !== '.css') value.base = `${value.name}.css`
 	if (!fs.existsSync(value.dir)) mkdirp(value.dir)
 	return value
 }
 
 function csscompile (input, output, options) {
-	if (!input) exit('Input not defined!')
-	if (!output) exit('Output not defined!')
-
-	input = resolveInput(input)
-	output = resolveOutput(output)
+	input = !input ? error('Input not defined!') : resolveInput(input)
+	output = !output ? resolveOutput(`${input.dir}/${input.base}`) : resolveOutput(output)
 	options = options || {}
-
-	console.log(input.rxt)
 
 	return new Promise((resolve, reject) => {
 		try {
@@ -53,10 +52,10 @@ function csscompile (input, output, options) {
 					child.exec(`node_modules/.bin/stylus ${input.dir}/${input.base} --out ${output.dir}/${output.base}`)
 					break
 				default:
-					exit('Extension not supported.')
+					error('Extension not supported.')
 			}
-			console.log(`[info] Rendering Complete, saving .css file...`)
-			console.log(`[info] Wrote CSS to ${path.resolve(output.dir, output.base)}`)
+			console.info(`[info] Rendering Complete, saving .css file...`)
+			console.info(`[info] Wrote CSS to ${path.resolve(output.dir, output.base)}`)
 			resolve(output)
 		} catch (err) {
 			reject(err)

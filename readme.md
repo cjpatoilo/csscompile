@@ -29,8 +29,10 @@ $ npm install csscompile
 **Usage**
 
 ```
-$ csscompile src/main.styl dist/main.css
+$ csscompile src/main.styl
 ```
+
+*NOTE: If you only declare the folder name by default the `main.{sass,scss,styl,less}` file will be searched.*
 
 
 ## CLI
@@ -40,7 +42,7 @@ $ csscompile --help
 
   Usage:
 
-    $ csscompile <input> <output> [<options>]
+    $ csscompile <input> [<output>] [<options>]
 
   Options:
 
@@ -49,7 +51,7 @@ $ csscompile --help
 
   Examples:
 
-    $ csscompile src/main.styl dist/main.css
+    $ csscompile src/app.sass dist/app.css
 ```
 
 
