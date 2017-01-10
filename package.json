@@ -6,7 +6,7 @@
 	"repository": "cjpatoilo/csscompile",
 	"license": "MIT",
 	"author": "CJ Patoilo <cjpatoilo@gmail.com>",
-	"bin":  "bin/cli.js",
+	"bin": "bin/cli.js",
 	"main": "src/index.js",
 	"files": [
 		"bin/cli.js",
@@ -40,10 +40,11 @@
 		".travis.yml"
 	],
 	"dependencies": {
-		"less": "^2.7.2",
-		"mkdirp": "^0.5.1",
-		"node-sass": "^4.1.1",
-		"stylus": "^0.54.5"
+		"gulp": "^3.9.1",
+		"gulp-cssnano": "^2.1.2",
+		"gulp-less": "^3.3.0",
+		"gulp-sass": "^3.1.0",
+		"gulp-stylus": "^2.6.0"
 	},
 	"devDependencies": {
 		"ava": "^0.17.0",

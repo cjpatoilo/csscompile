@@ -1,8 +1,11 @@
 'use strict'
 const fs = require('fs')
 const path = require('path')
-const child = require('child_process')
-const mkdirp = require('mkdirp')
+const gulp = require('gulp')
+const sass = require('gulp-sass')
+const less = require('gulp-less')
+const stylus = require('gulp-stylus')
+const cssnano = require('gulp-cssnano')
 
 function error (value) {
 	value = value || undefined
@@ -11,51 +14,53 @@ function error (value) {
 }
 
 function resolveInput (value) {
-	if (!fs.existsSync(value)) error('File not found!')
-	if (fs.lstatSync(value).isFile()) return path.parse(value)
+	if (!value) error('Input not defined!')
+	if (path.parse(value).name === '*') value = path.dirname(path.parse(value).dir)
+	if (fs.lstatSync(value).isFile()) value = path.dirname(value)
 	if (fs.lstatSync(value).isDirectory()) {
-		let main = fs.readdirSync(value)
-			.filter(file => path.parse(file).name === 'main' && path.parse(file).ext !== '.css')
-		main = main[0] ? path.resolve(value, main[0]) : error('Main file not found!')
-		return path.parse(main)
+		let dirname = value
+		value = fs.readdirSync(value)
+			.filter(file => path.parse(file).ext === '.sass' || path.parse(file).ext === '.scss' || path.parse(file).ext === '.less' || path.parse(file).ext === '.styl')
+		value = value[0] ? path.resolve(dirname, `**/*${path.parse(value[0]).ext}`) : error('File not found!')
 	}
-	error('File not found!')
+	return path.resolve(value)
 }
 
-function resolveOutput (value) {
-	if (path.basename(value) !== '.css') value = path.resolve(value, 'main.css')
-	value = path.parse(value)
-	if (value.ext !== '.css') value.ext = '.css'
-	if (path.extname(value.base) !== '.css') value.base = `${value.name}.css`
-	if (!fs.existsSync(value.dir)) mkdirp(value.dir)
-	return value
+function resolveOutput (input, output) {
+	if (!output) return path.dirname(path.dirname(input))
+	return path.resolve(output)
 }
 
-function csscompile (input, output, options) {
-	input = !input ? error('Input not defined!') : resolveInput(input)
-	output = !output ? resolveOutput(`${input.dir}/${input.base}`) : resolveOutput(output)
-	options = options || {}
+function csscompile (input, output) {
+	input = resolveInput(input)
+	output = resolveOutput(input, output)
 
 	return new Promise((resolve, reject) => {
 		try {
-			switch (input.ext) {
+			let compile
+			switch (path.parse(input).ext) {
 				case '.sass':
-					child.exec(`node_modules/.bin/node-sass --output-style expanded ${input.dir}/${input.base} ${output.dir}/${output.base}`)
+					compile = sass
 					break
 				case '.scss':
-					child.exec(`node_modules/.bin/node-sass --output-style expanded ${input.dir}/${input.base} ${output.dir}/${output.base}`)
+					compile = sass
 					break
 				case '.less':
-					child.exec(`node_modules/.bin/lessc ${input.dir}/${input.base} ${output.dir}/${output.base}`)
+					compile = less
 					break
 				case '.styl':
-					child.exec(`node_modules/.bin/stylus ${input.dir}/${input.base} --out ${output.dir}/${output.base}`)
+					compile = stylus
 					break
 				default:
-					error('Extension not supported.')
+					error('Input not supported.')
 			}
+			gulp
+				.src(input)
+				.pipe(compile())
+				.pipe(cssnano())
+				.pipe(gulp.dest(output))
 			console.info(`[info] Rendering Complete, saving .css file...`)
-			console.info(`[info] Wrote CSS to ${path.resolve(output.dir, output.base)}`)
+			console.info(`[info] Wrote CSS to ${output}`)
 			resolve(output)
 		} catch (err) {
 			reject(err)
