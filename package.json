@@ -1,6 +1,6 @@
 {
 	"name": "csscompile",
-	"version": "0.0.4",
+	"version": "0.0.5",
 	"description": "Compile, optimize and compress anything to CSS.",
 	"homepage": "https://github.com/cjpatoilo/csscompile",
 	"repository": "cjpatoilo/csscompile",
