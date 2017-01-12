@@ -14,16 +14,13 @@ function error (value) {
 }
 
 function resolveInput (value) {
-	if (!value) error('Input not defined!')
-	if (path.parse(value).name === '*') value = path.dirname(path.parse(value).dir)
-	if (fs.lstatSync(value).isFile()) value = path.dirname(value)
-	if (fs.lstatSync(value).isDirectory()) {
-		let dirname = value
-		value = fs.readdirSync(value)
-			.filter(file => path.parse(file).ext === '.sass' || path.parse(file).ext === '.scss' || path.parse(file).ext === '.less' || path.parse(file).ext === '.styl')
-		value = value[0] ? path.resolve(dirname, `**/*${path.parse(value[0]).ext}`) : error('File not found!')
-	}
-	return path.resolve(value)
+	if (!fs.existsSync(value)) error('Input not exist.')
+	if (fs.lstatSync(value).isFile()) error('Input should be a folder.')
+	let dirname = value
+	value = fs
+		.readdirSync(value)
+		.filter(file => path.parse(file).ext === '.sass' || path.parse(file).ext === '.scss' || path.parse(file).ext === '.less' || path.parse(file).ext === '.styl')
+	return value[0] ? path.resolve(dirname, `**/*${path.parse(value[0]).ext}`) : error('File not found.')
 }
 
 function resolveOutput (input, output) {

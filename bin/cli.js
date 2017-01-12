@@ -22,8 +22,9 @@ if (argv.indexOf('--help') !== -1 || argv.indexOf('-h') !== -1) {
 
   Examples:
 
-    $ csscompile src/app.sass dist/app.css
-`)
+    $ csscompile src
+    $ csscompile src dist
+	`)
 	process.exit(0)
 }
 

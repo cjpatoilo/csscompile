@@ -13,9 +13,9 @@
 
 ## Why it's awesome
 
-This library reads the package.json files for each of those dependencies. Based on these connections, it will generate a bundle of the master files.
+No spend several hours setting configuration files. **CSSCompile** will compile, optimize and compress anything to CSS. Set folder name where the source code is located and we'll take care of the rest for you. Just it!
 
-*NOTE: For now only works with Sass, SCSS, Stylus and Less files.*
+*NOTE: For now only works with Sass, Less and Stylus.*
 
 
 ## Getting Started
@@ -29,10 +29,10 @@ $ npm install csscompile
 **Usage**
 
 ```
-$ csscompile src/main.styl
+$ csscompile src dist
 ```
 
-*NOTE: If you only declare the folder name by default the `main.{sass,scss,styl,less}` file will be searched.*
+*NOTE: Only the folder name is required.*
 
 
 ## CLI
@@ -51,9 +51,9 @@ $ csscompile --help
 
   Examples:
 
-    $ csscompile src/app.sass dist/app.css
+    $ csscompile src
+    $ csscompile src dist
 ```
-
 
 
 ## Contributing
