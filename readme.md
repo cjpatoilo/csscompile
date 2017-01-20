@@ -15,7 +15,7 @@
 
 No spend several hours setting configuration files. **CSSCompile** will compile, optimize and compress anything to CSS. Set folder name where the source code is located and we'll take care of the rest for you. Just it!
 
-*NOTE: For now only works with Sass, Less and Stylus.*
+*NOTE: For now only works with Less, Sass, Stylus and CSS.*
 
 
 ## Getting Started

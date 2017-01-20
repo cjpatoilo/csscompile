@@ -2,8 +2,9 @@
 const fs = require('fs')
 const path = require('path')
 const gulp = require('gulp')
-const sass = require('gulp-sass')
+const css = require('gulp-cssmin')
 const less = require('gulp-less')
+const sass = require('gulp-sass')
 const stylus = require('gulp-stylus')
 const cssnano = require('gulp-cssnano')
 
@@ -19,7 +20,7 @@ function resolveInput (value) {
 	let dirname = value
 	value = fs
 		.readdirSync(value)
-		.filter(file => path.parse(file).ext === '.sass' || path.parse(file).ext === '.scss' || path.parse(file).ext === '.less' || path.parse(file).ext === '.styl')
+		.filter(file => path.parse(file).ext === '.css' || path.parse(file).ext === '.less' || path.parse(file).ext === '.sass' || path.parse(file).ext === '.scss' || path.parse(file).ext === '.styl')
 	return value[0] ? path.resolve(dirname, `**/*${path.parse(value[0]).ext}`) : error('File not found.')
 }
 
@@ -36,14 +37,17 @@ function csscompile (input, output) {
 		try {
 			let compile
 			switch (path.parse(input).ext) {
+				case '.css':
+					compile = css
+					break
+				case '.less':
+					compile = less
+					break
 				case '.sass':
 					compile = sass
 					break
 				case '.scss':
 					compile = sass
-					break
-				case '.less':
-					compile = less
 					break
 				case '.styl':
 					compile = stylus
