@@ -10,13 +10,11 @@
 [![Download Status](https://img.shields.io/npm/dt/csscompile.svg)](https://www.npmjs.com/package/csscompile)
 [![Gitter Chat](https://img.shields.io/badge/gitter-join_the_chat-4cc61e.svg)](https://gitter.im/cjpatoilo/csscompile)
 
-
 ## Why it's awesome
 
 No spend several hours setting configuration files. **CSSCompile** will compile, optimize and compress anything to CSS. Set folder name where the source code is located and we'll take care of the rest for you. Just it!
 
-*NOTE: For now only works with Less, Sass, Stylus and CSS.*
-
+_NOTE: For now only works with Less, Sass, Stylus and CSS._
 
 ## Getting Started
 
@@ -26,14 +24,25 @@ No spend several hours setting configuration files. **CSSCompile** will compile,
 $ npm install csscompile
 ```
 
+**Install with Yarn**
+
+```
+$ yarn add csscompile
+```
+
+**Run with npx (without installing)**
+
+```
+$ npx install csscompile
+```
+
 **Usage**
 
 ```
 $ csscompile src dist
 ```
 
-*NOTE: Only the folder name is required.*
-
+_NOTE: Only the folder name is required._
 
 ## CLI
 
@@ -55,12 +64,10 @@ $ csscompile --help
     $ csscompile src dist
 ```
 
-
 ## Contributing
 
-Want to contribute? Follow these [recommendations](https://github.com/cjpatoilo/csscompile/blob/master/.github/contributing.md).
-
+Want to contribute? Follow these [recommendations](https://github.com/cjpatoilo/csscompile/contribute).
 
 ## License
 
-Designed with ♥ by [CJ Patoilo](http://twitter.com/cjpatoilo). Licensed under the [MIT License](http://cjpatoilo.mit-license.org).
+Designed with ♥ by [CJ Patoilo](https://twitter.com/cjpatoilo). Licensed under the [MIT License](https://cjpatoilo.com/license).
